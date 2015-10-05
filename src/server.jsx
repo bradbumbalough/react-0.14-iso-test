@@ -4,6 +4,8 @@ var express = require('express'),
     babelify = require('express-babelify-middleware'),
     history = require('history'),
     routes = require('./routes'),
+    fetchData = require('./fetchData'),
+    DataContext = require('./components/DataContext'),
     {match, RoutingContext} = require('react-router');
 
 var app = express();
@@ -25,9 +27,11 @@ app.get('*',function(req, res) {
     else if (renderProps == null)
       res.send(404, 'Not found')
     else
-      var clientHandoff = {},
-          html = renderToString(<RoutingContext {...renderProps}/>);
-      return res.render('index.ejs', { reactOutput: html, reactData: JSON.stringify(clientHandoff)});
+      fetchData(renderProps).then((data) => {
+        var clientHandoff = data,
+            html = renderToString(<DataContext data={data}><RoutingContext {...renderProps}/></DataContext>);
+        return res.render('index.ejs', { reactOutput: html, reactData: JSON.stringify(clientHandoff)});
+      });
   });
 });
 
