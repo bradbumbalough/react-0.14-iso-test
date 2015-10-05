@@ -17,7 +17,7 @@ var People = React.createClass({
         <h1>Select Your Favorite Star Wars Character</h1>
         <ul>
           {
-            this.context.data.People.results.map((person) => {
+            this.context.data.data.People.results.map((person) => {
               var id = person.url.replace('http://swapi.co/api/people/','').replace('/','')
               return <li key={person.name}><Link to={`/people/${id}`}>{person.name}</Link></li>
             })
