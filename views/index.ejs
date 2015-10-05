@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+      React 0.14 Isomorphic Test App
+    </title>
+  </head>
+  <body>
+    <div id="react-mount"><%- reactOutput %></div>
+    <script type="text/javascript">
+      var __DATA__ = <%- reactData %>;
+    </script>
+    <script src="/bundle.js"></script>
+  </body>
+</html>
