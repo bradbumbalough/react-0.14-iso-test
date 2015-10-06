@@ -1,9 +1,9 @@
 var React = require('react'),
+    {Link} = require('react-router'),
     API = require('../API')
 
 var Person = React.createClass({
   statics: {
-    key: 'Person',
     loadData: (props) => {
       return API.getPerson(props.params.id)
     }
@@ -13,10 +13,10 @@ var Person = React.createClass({
   },
   render() {
     var {Person} = this.context.data.data
-    console.log(Person)
     return (
       <div>
-        <h1>{Person.name}</h1>
+        <Link to="/people">Back</Link>
+        <h3>{Person.name}</h3>
       </div>
   )}
 });

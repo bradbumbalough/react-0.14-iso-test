@@ -7,5 +7,8 @@ module.exports = [
     <Route path="people" component={require('./components/people')}>
       <Route path=":id" component={require('./components/person')}/>
     </Route>
+    <Route path="vehicles" component={require('./components/vehicles')}>
+      <Route path=":id" component={require('./components/vehicle')}/>
+    </Route>
   </Route>
 ]

@@ -16,6 +16,22 @@ var API = {
         return res.data
       })
     )
+  },
+  getVehicles: () => {
+    return (
+      axios.get('http://swapi.co/api/vehicles/')
+      .then((res) => {
+        return res.data
+      })
+    )
+  },
+  getVehicle: (id) => {
+    return (
+      axios.get('http://swapi.co/api/vehicles/' + id + '/')
+      .then((res) => {
+        return res.data
+      })
+    )
   }
 }
 

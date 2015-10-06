@@ -4,7 +4,6 @@ var React = require('react'),
 
 var People = React.createClass({
   statics: {
-    key: 'Peopel',
     loadData: (props) => {
       return API.getPeople()
     }
@@ -13,17 +12,18 @@ var People = React.createClass({
     data: React.PropTypes.object
   },
   render() {
+    var {People} = this.context.data.data
     return (
       <div>
-        <h1>Select Your Favorite Star Wars Character</h1>
-        <ul>
-          {
-            this.context.data.data.People.results.map((person) => {
-              var id = person.url.replace('http://swapi.co/api/people/','').replace('/','')
-              return <li key={person.name}><Link to={`/people/${id}`}>{person.name}</Link></li>
-            })
-          }
-        </ul>
+        <h2>People</h2>
+          <ul>
+            {
+              People.results.map((person) => {
+                var id = person.url.replace('http://swapi.co/api/people/','').replace('/','')
+                return <li key={person.name}><Link to={`/people/${id}`}>{person.name}</Link></li>
+              })
+            }
+          </ul>
         {this.props.children}
       </div>
   )}

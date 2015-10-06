@@ -6,6 +6,7 @@ var express = require('express'),
     routes = require('./routes'),
     fetchData = require('./fetchData'),
     DataContext = require('./components/DataContext'),
+    path = require('path'),
     {match, RoutingContext} = require('react-router');
 
 var app = express();
@@ -16,9 +17,14 @@ app.set('view engine', 'ejs');
 // bablified js file
 app.get('/bundle.js', babelify(__dirname + '/client.js'));
 
+// favicon
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, '../', 'favicon.ico'))
+})
+
 
 // server router
-app.get('*',function(req, res) {
+app.get('*', (req, res) => {
   var location = history.createLocation(req.url)
   match({routes, location}, (error, redirectLocation, renderProps) => {
     if (redirectLocation)

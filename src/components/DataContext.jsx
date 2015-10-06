@@ -2,7 +2,6 @@ var React = require('react')
 
 var DataContext = React.createClass({
   getInitialState() {
-    console.log(this.props.data)
     return {
       data: this.props.data,
     }
@@ -19,17 +18,23 @@ var DataContext = React.createClass({
       }
     }
   },
-  append(newData) {
-    console.log(newData)
+  append(component, newData, keyToRemove) {
     var {data} = this.state
-    for (var key in newData) {
-      data[key] = newData[key]
-      this.setState({data})
+    if (keyToRemove) {
+      delete data[keyToRemove]
     }
+    if (data[component] !== undefined) {
+      for (var key in newData) {
+        data[component][key] = newData[key]
+      }
+    } else {
+        data[component] = newData
+    }
+    this.setState({data})
   },
-  remove(key) {
+  remove(component) {
     var data = this.state.data
-    delete data[key]
+    delete data[component]
     this.setState({data})
   },
   render() {
