@@ -10,6 +10,7 @@ var express = require('express'),
 
 var app = express();
 
+app.set('port',process.env.PORT || 3000);
 app.set('view engine', 'ejs');
 
 // bablified js file
@@ -37,6 +38,6 @@ app.get('*',function(req, res) {
   });
 });
 
-app.listen(8080, function() {
-  console.log('Listening on port 8080...');
+app.listen(app.get('port'), function() {
+  console.log('Listening on port ' + app.get('port') + '...');
 });
