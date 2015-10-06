@@ -4,16 +4,12 @@ var React = require('react'),
     createBrowserHistory = require('history/lib/createBrowserHistory'),
     fetchData = require('./fetchData'),
     DataContext = require('./components/DataContext'),
-    routes = require('./routes');
-
-function AsyncProps(Component, props) {
-  console.log(props)
-  return <Component {...props}/>
-}
+    routes = require('./routes'),
+    asyncProps = require('./AsyncProps')
 
 render(
   <DataContext data={window.__DATA__} >
-    <Router history={createBrowserHistory()} createElement={AsyncProps}>
+    <Router history={createBrowserHistory()} createElement={asyncProps}>
       {routes}
     </Router>
   </DataContext>,

@@ -8,6 +8,14 @@ var API = {
         return res.data
       })
     )
+  },
+  getPerson: (id) => {
+    return (
+      axios.get('http://swapi.co/api/people/' + id + '/')
+      .then((res) => {
+        return res.data
+      })
+    )
   }
 }
 

@@ -4,6 +4,7 @@ var React = require('react'),
 
 var People = React.createClass({
   statics: {
+    key: 'Peopel',
     loadData: (props) => {
       return API.getPeople()
     }

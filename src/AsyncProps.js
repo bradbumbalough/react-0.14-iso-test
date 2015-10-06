@@ -1,58 +1,51 @@
-import React from 'react'
+var React = require('react'),
+    fetchData = require('./fetchData')
 
-export class AsyncProps extends React.Component {
+// component to get the props
+var AsyncProps = React.createClass({
+  propTypes: {
+    Component: React.PropTypes.func,
+    routerProps: React.PropTypes.object
+  },
 
-  constructor(props, context) {
-    super(props, context)
-    this.state = {
-      asyncProps: null,
-      prevProps: null
-    }
-  }
+  contextTypes: {
+    data: React.PropTypes.object
+  },
 
   componentDidMount() {
-    this.load(this.props, (err, props) => {
-      this.setState({ asyncProps: props })
-    })
-  }
+    // fetch the data
+    this.load(this.props)
+  },
 
   componentWillReceiveProps(nextProps) {
-    let location = this.props.routerProps.location
-    let nextLocation = nextProps.routerProps.location
+    var {Component, routerProps} = this.props
+    var location = routerProps.location
+    var nextLocation = nextProps.routerProps.location
     if (location !== nextLocation) {
-      this.setState({
-        prevProps: this.props
-      })
-      this.load(nextProps, (err, asyncProps) => {
-        this.setState({
-          asyncProps,
-          prevProps: null
-        })
-      })
+      // this.setState({
+      //   prevProps: this.props
+      // })
+      this.load(nextProps)
     }
-  }
+  },
 
-  load(props, cb) {
-    let params = props.routerProps.params
-    props.Component.loadProps(params, cb)
-  }
+  load(props) {
+    var {Component} = props
+    fetchData(props.routerProps).then((data) => {
+      this.context.data.append(data)
+    }, (error) => {
+      console.log(err)
+    })
+  },
 
   render() {
-    let { asyncProps, prevProps } = this.state
-    let props = prevProps || this.props
-    let { Component, routerProps } = props
-    let loading = !!prevProps
-
-    if (!asyncProps)
-      return null
-    else
-      return <Component {...routerProps} {...asyncProps} loading={loading}/>
+    var {Component, routerProps} = this.props
+    return <Component {...routerProps}/>
   }
+})
 
-}
-
-export function asyncProps (Component, props) {
-  return Component.loadProps ?
+module.exports = function asyncProps(Component, props) {
+  return Component.loadData ?
     <AsyncProps Component={Component} routerProps={props}/> :
-    <Component {...props}/>
+    <Component {...props} />
 }

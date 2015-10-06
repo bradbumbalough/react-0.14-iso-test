@@ -31,6 +31,8 @@ app.get('*',function(req, res) {
         var clientHandoff = data,
             html = renderToString(<DataContext data={data}><RoutingContext {...renderProps}/></DataContext>);
         return res.render('index.ejs', { reactOutput: html, reactData: JSON.stringify(clientHandoff)});
+      }, (error) => {
+        console.log(error)
       });
   });
 });
