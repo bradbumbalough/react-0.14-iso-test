@@ -26,7 +26,6 @@ var AsyncProps = React.createClass({
   componentDidMount() {
     // fetch the data
     this.load(this.props)
-    console.log(this.props.Component.displayName + ' mounted')
   },
 
   componentWillReceiveProps(nextProps) {
@@ -42,7 +41,6 @@ var AsyncProps = React.createClass({
 
   componentWillUnmount() {
     this.context.data.remove(this.props.Component.displayName)
-    console.log(this.props.Component.displayName + ' unmounted')
   },
 
   load(props, oldProps) {
