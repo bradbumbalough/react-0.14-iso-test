@@ -2,7 +2,7 @@ var express = require('express'),
     React = require('react'),
     {renderToString} = require('react-dom/server'),
     babelify = require('express-babelify-middleware'),
-    history = require('history'),
+    {createLocation, createMemoryHistory, useQueries} = require('history'),
     routes = require('./routes'),
     fetchData = require('./fetchData'),
     DataContext = require('./components/DataContext'),
@@ -25,6 +25,7 @@ app.get('/favicon.ico', (req, res) => {
 
 // server router
 app.get('*', (req, res) => {
+  var history = useQueries(createMemoryHistory)()
   var location = history.createLocation(req.url)
   match({routes, location}, (error, redirectLocation, renderProps) => {
     if (redirectLocation)
