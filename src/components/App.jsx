@@ -11,7 +11,7 @@ var App = React.createClass({
         <div>
           <h1>React 0.14 Isomorphic Test App</h1>
           <ul>
-            <li><Link to="/people" activeStyle={activeStyle}>People</Link></li>
+            <li><Link to="/people" activeStyle={activeStyle} >People</Link></li>
             <li><Link to="/vehicles" activeStyle={activeStyle}>Vehicles</Link></li>
           </ul>
           {this.props.children}

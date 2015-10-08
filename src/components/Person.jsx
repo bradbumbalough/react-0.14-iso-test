@@ -12,7 +12,7 @@ var Person = React.createClass({
     data: React.PropTypes.object
   },
   render() {
-    var {Person} = this.context.data.data
+    var {Person} = this.context.data
     return (
       <div>
         <Link to="/people">Back</Link>

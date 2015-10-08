@@ -10,5 +10,8 @@
 
 ## Uses
 
-- React 0.14.0 RC1
-- Reat Router 1.0.0 RC1
+- React 0.14.0
+- Reat Router 1.0.0 RC2
+
+## Server Side
+TODO

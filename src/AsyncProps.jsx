@@ -56,7 +56,7 @@ var AsyncProps = React.createClass({
 
   render() {
     var {Component, routerProps} = this.props
-    if (this.context.data.data[Component.displayName] !== undefined) {
+    if (this.context.data[Component.displayName] !== undefined) {
       return <Component {...routerProps}/>
     } else {
       return null

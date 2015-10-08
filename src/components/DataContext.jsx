@@ -10,13 +10,10 @@ var DataContext = React.createClass({
     data: React.PropTypes.object
   },
   getChildContext() {
-    return {
-      data: {
-        append: this.append,
-        remove: this.remove,
-        data: this.state.data
-      }
-    }
+    var {data} = this.state
+    data.append = this.append
+    data.remove = this.remove
+    return { data }
   },
   append(component, newData, keyToRemove) {
     var {data} = this.state

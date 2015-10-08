@@ -12,7 +12,7 @@ var People = React.createClass({
     data: React.PropTypes.object
   },
   render() {
-    var {People} = this.context.data.data
+    var {People} = this.context.data
     return (
       <div>
         <h2>People</h2>
