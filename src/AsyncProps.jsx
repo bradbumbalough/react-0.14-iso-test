@@ -29,12 +29,14 @@ var AsyncProps = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    var {routeParams, route} = this.props.routerProps
+    var {routeParams, route, location} = this.props.routerProps
     var nextRoute = nextProps.routerProps.route
+    var nextLocation = nextProps.routerProps.location
     var nextRouteParams = nextProps.routerProps.routeParams
     var routeChanged = route !== nextRoute
     var routeParamsChanged = !compareObjects(routeParams, nextRouteParams)
-    if ( routeChanged || routeParamsChanged) {
+    var queryChanged = !compareObjects(location.query, nextLocation.query)
+    if ( routeChanged || routeParamsChanged || queryChanged) {
       this.load(nextProps, this.props)
     }
   },
