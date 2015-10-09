@@ -52,7 +52,7 @@ var AsyncProps = React.createClass({
     Component.loadData(props.routerProps).then((data) => {
       append(Component.displayName,data,oldProps !== undefined ? oldProps.Component.displayName : null)
     }, (error) => {
-      console.log(err)
+      console.log(error)
     })
   },
 
